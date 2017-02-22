@@ -1,4 +1,5 @@
-package cs.ai.classifier;
+package main.java.cs.ai;
+
 
 import java.util.Collection;
 import java.util.Enumeration;

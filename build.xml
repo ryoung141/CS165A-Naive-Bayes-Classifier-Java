@@ -1,7 +1,6 @@
 <project name="CS165A_CLASSIFIER" basedir="." default="main">
 
     <property name="src.dir"        value="src/main/java/cs/ai/"/>
-    <property name="bayes.dir"      value="src/main/java/cs/ai/bayes"/>
     <property name="build.dir"      value="build"/>
     <property name="classes.dir"    value="${build.dir}/classes"/>
     <property name="jar.dir"        value="${build.dir}/jar"/>
@@ -12,10 +11,16 @@
         <delete dir="${build.dir}"/>
     </target>
 
+    <target name="test">
+        <javac srcdir="src/main/java/cs/ai" includes="run_this.java" destdir="src/main/java/cs/ai"/>
+        <java classname="run_this">
+            <arg value="run_this_test.txt"/>
+        </java>
+    </target>
+
     <target name = "compile">
         <mkdir dir = "${classes.dir}"/>
         <javac srcdir = "${src.dir}" destdir="${classes.dir}"/>
-        <javac srcdir="${bayes.dir}" destdir="${classes.dir}"/>
     </target>
 
     <target name="jar" depends="compile">

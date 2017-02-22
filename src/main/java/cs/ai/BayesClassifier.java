@@ -1,4 +1,4 @@
-package cs.ai.classifier.bayes;
+package main.java.cs.ai;
 
 import java.util.Comparator;
 import java.util.SortedSet;
