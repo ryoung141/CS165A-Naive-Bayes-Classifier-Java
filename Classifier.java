@@ -1,3 +1,4 @@
+
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -8,29 +9,6 @@ import java.util.Dictionary;
 
 public abstract class Classifier<T, K> implements FeatProbability<T, K>{
 
-    /*****************************************************************
-     * PRIVATE MEMBERS OF CLASSIFIER
-     ********************************************************************/
-    //initial cap of category dictionaries
-    private static final int INITIAL_CATEGORY_DICTIONARY_CAPACITY = 16;
-
-    //initial cap of feature dicts
-    private static final int INITIAL_FEATURE_DICTIONARY_CAPACITY = 32;
-
-    //initial memory capacity-- how many classifications can be memorized
-    private int memoryCapacity = 1000;
-
-    //Dictionary that maps features to # of occurrences in each category
-    private Dictionary<K, Dictionary <T, Integer>> featCountPerCategory;
-
-    //Dictionary mapping features to # of occurrences
-    private Dictionary<T, Integer> totalFeatCount;
-
-    //A dictionary mapping categories to # of occurrences
-    private Dictionary<K, Integer> totalCategoryCount;
-
-    //Memory queue facilitating forgetful memory
-    private Queue<Classification<T, K>> memoryQueue;
 
 /********************************************************************************
  * PUBLIC MEMBERS OF CLASSIFIER
@@ -230,4 +208,29 @@ public abstract class Classifier<T, K> implements FeatProbability<T, K>{
 
     //retrieve most likely category for feat given
     public abstract Classification<T, K> classify(Collection<T> features);
+
+    /*****************************************************************
+     * PRIVATE MEMBERS OF CLASSIFIER
+     ********************************************************************/
+    //initial cap of category dictionaries
+    private static final int INITIAL_CATEGORY_DICTIONARY_CAPACITY = 16;
+
+    //initial cap of feature dicts
+    private static final int INITIAL_FEATURE_DICTIONARY_CAPACITY = 32;
+
+    //initial memory capacity-- how many classifications can be memorized
+    private int memoryCapacity = 1000;
+
+    //Dictionary that maps features to # of occurrences in each category
+    private Dictionary<K, Dictionary <T, Integer>> featCountPerCategory;
+
+    //Dictionary mapping features to # of occurrences
+    private Dictionary<T, Integer> totalFeatCount;
+
+    //A dictionary mapping categories to # of occurrences
+    private Dictionary<K, Integer> totalCategoryCount;
+
+    //Memory queue facilitating forgetful memory
+    private Queue<Classification<T, K>> memoryQueue;
+
 }
