@@ -1,31 +1,39 @@
-package main.java.cs.ai;
-
-
-import java.io.Reader;
-import java.io.File;
+import java.io.FileReader;
 import java.util.Arrays;
-
-import main.java.cs.ai.BayesClassifier;
-import main.java.cs.ai.Classifier;
-
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.util.List;
 public class run_this{
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException{
         final Classifier<String, String> bayes =
                 new BayesClassifier<String, String>();
-        File f = new File(args[0]);
+        FileReader fr = new FileReader(args[0]);
         String words[];
         String line;
-        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(f), "UTF-8"));
-        while((line=br.readLine() != null)){
-            words = line.split("//s");
-            int s = Array.getlength(words);
-            if (words[s-1] == 0) {
-                bayes.learn("negative", Arrays.asList(words));
-            }
-            if (words[s-1] == 1){
-                bayes.learn("positive", Arrays.asList(words));
-            }
-        }
+        BufferedReader br = new BufferedReader(fr);
+	try{
+	    while((line = br.readLine()) != null) {
+		words = line.split("\\s+");
+		int s = words.length;
+		List<String> wordList = Arrays.asList(words);
+		System.out.println(words[s-1]);
+		if (words[s-1].equals("0")) {
+		    bayes.learn("negative", wordList);
+		    System.out.println("bad");
+		}
+		if (words[s-1].equals("1")){
+		    bayes.learn("positive", wordList);
+		    System.out.println("good");
+		}
+		final String[] u1 = "Movie good af".split(" ");
+		final String[] u2 = "movie bad af".split(" ");
+		System.out.println(bayes.classify(Arrays.asList(u1)).getCategory());
+		System.out.println(bayes.classify(Arrays.asList(u2)).getCategory());
+	    }}catch (NullPointerException e){
+	    System.out.println(e.getMessage());
+	    e.printStackTrace();
+	}
     }
 }
+

@@ -1,6 +1,3 @@
-package main.java.cs.ai;
-
-
 import java.util.Collection;
 
 public class Classification<T, K> {

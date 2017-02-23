@@ -1,6 +1,3 @@
-package main.java.cs.ai;
-
-
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -88,12 +85,12 @@ public abstract class Classifier<T, K> implements FeatProbability<T, K>{
     //AKA telling classifier that feat has occurred
     public void incrementFeature(T feature, K category) {
         Dictionary<T, Integer> features = this.featCountPerCategory.get(category);
-        if (features = null) {
+        if (features == null) {
             this.featCountPerCategory.put(category, new Hashtable<T, Integer>(Classifier.INITIAL_FEATURE_DICTIONARY_CAPACITY));
             features = this.featCountPerCategory.get(category);
         }
         Integer cnt = features.get(feature);
-        if (cnt = null) {
+        if (cnt == null) {
             features.put(feature, 0);
             cnt = features.get(feature);
         }
@@ -146,7 +143,7 @@ public abstract class Classifier<T, K> implements FeatProbability<T, K>{
             this.totalFeatCount.remove(feature);
         }
         else{
-            this.totalFeatCount.put(feature --totalCnt);
+            this.totalFeatCount.put(feature, --totalCnt);
         }
     }
 
@@ -176,6 +173,11 @@ public abstract class Classifier<T, K> implements FeatProbability<T, K>{
     public int getFeatureCount(T feature){
         Integer cnt = this.totalFeatCount.get(feature);
         return (cnt == null) ? 0 : cnt.intValue();
+    }
+
+    public int getCategoryCount(K category){
+	Integer cnt = this.totalCategoryCount.get(category);
+	return (cnt == null) ? 0 : cnt.intValue();
     }
 
     //part of FeatProbability.java class
@@ -210,7 +212,7 @@ public abstract class Classifier<T, K> implements FeatProbability<T, K>{
 
     //train classifier
     public void learn(K category, Collection<T> feats){
-        this.learn(new Classification<T, K>(features, category));
+        this.learn(new Classification<T, K>(feats, category));
     }
 
     public void learn(Classification<T, K> classification){
