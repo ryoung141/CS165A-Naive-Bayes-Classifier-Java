@@ -5,43 +5,14 @@
     <property name="classes.dir"    value="${build.dir}/classes"/>
     <property name="jar.dir"        value="${build.dir}/jar"/>
     <property name="main-class"     value= "run_this"/>
-
-    <path id="project.classpath">
-        <pathelement path="${src.dir}"/>
-        <pathelement path="${build.dir}"/>
-    </path>
-
-    <target name = "clean">
-        <delete dir="${build.dir}"/>
-
-    </target>
-
-    <target name="test">
-        <javac srcdir="src/main/java/cs/ai" includes="run_this.java" destdir="src/main/java/cs/ai"/>
-        <java classname="run_this">
-            <arg value="run_this_test.txt"/>
-        </java>
-    </target>
-
+    
     <target name = "compile">
-        <mkdir dir = "${classes.dir}"/>
-        <javac srcdir = "${src.dir}" destdir="${classes.dir}"/>
+      <javac srcdir="." destdir="."/>
     </target>
 
     <target name="jar" depends="compile">
-        <mkdir dir="${jar.dir}"/>
-        <jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}" includes="${classes.dir}">
-            <manifest>
-                <attribute name="Main-Class" value="${main-class}"/>
-            </manifest>
-        </jar>
+        <jar destfile="NaiveBayesClassifier.jar" basedir="." manifest="Manifest.txt"/>
     </target>
-
-    <target name="run" depends="jar">
-        <java classpathref="project.classpath" jar="${jar.dir}/${ant.project.name}.jar" fork="true"/>
-    </target>
-
-    <target name="clean-build" depends="clean,jar"/>
-
-    <target name="main" depends="clean, run"/>
+    
+    <target name="make" depends="jar"/>
 </project>

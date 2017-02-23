@@ -1,0 +1,2 @@
+#!/bin/bash
+java -jar NaiveBayesClassifier.jar $1 $2
