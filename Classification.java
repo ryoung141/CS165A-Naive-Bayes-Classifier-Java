@@ -2,12 +2,6 @@ import java.util.Collection;
 
 public class Classification<T, K> {
 
-    /**********************************************************************************
-     * PRIVATE MEMBERS
-     **********************************************************************************/
-    private Collection<T> features;
-    private K category;
-    private float prob;
 
     /**********************************************************************************
      * PUBLIC MEMBERS
@@ -38,5 +32,12 @@ public class Classification<T, K> {
     public String toString(){
         return "Classification | category=" + this.category + ", probability=" + this.prob + ", features=" + this.features + " | ";
     }
+
+    /**********************************************************************************
+     * PRIVATE MEMBERS
+     **********************************************************************************/
+    private Collection<T> features;
+    private K category;
+    private float prob;
 
 }

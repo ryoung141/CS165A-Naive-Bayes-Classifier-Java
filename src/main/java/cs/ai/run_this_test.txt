@@ -1,2 +1,0 @@
-This movie is bad   0
-This movie is good  1
